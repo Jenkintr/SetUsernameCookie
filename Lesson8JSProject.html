@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Lesson 7 Application Project</title>
+
+<script language="javascript">
+//Function in the head secion that will set a cookie to the user's name submitted via the text box.
+function setCookie(cname, cvalue){
+	document.cookie = cname + "=" + cvalue;
+}
+
+function getCookie(cname){
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for (var i = 0; i<ca.length; i++){
+		var c = ca[i];
+		while(c.charAt(0) == ' '){
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0){
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "";
+}
+
+function checkCookie(){
+	
+	alert("Cookie Checked" + uName);
+	if (username != ""){
+		alert("Welcome again " + username);
+		return false;
+	} else {
+		username = prompt ("Please enter your name: ", "");
+		if (username != "" && username != null){
+			setCookie("username", username, 365);
+			return false;
+		}
+	}
+}
+
+</script>
+</head>
+<!--End of Head -->
+
+<body>
+<h1>Lesson 8:</h1>
+<p><em>Taylor Jenkins</em></p>
+<h3>CIW JavaScript Specialist</h3>
+<hr />
+<form onsubmit="checkCookie()">
+<p>
+Username: <input type="text" id="usrname" name="usrname" />
+</p>
+<p>
+<input type="submit" value="Submit"/>
+<input type="reset" />
+</p>
+</form>
+
+</body>
+</html>
