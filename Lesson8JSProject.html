@@ -1,43 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Lesson 7 Application Project</title>
+<title>Lesson 8 Application Project | Using Cookies</title>
 
 <script language="javascript">
-//Function in the head secion that will set a cookie to the user's name submitted via the text box.
-function setCookie(cname, cvalue){
-	document.cookie = cname + "=" + cvalue;
-}
 
-function getCookie(cname){
-	var name = cname + "=";
-	var ca = document.cookie.split(';');
-	for (var i = 0; i<ca.length; i++){
-		var c = ca[i];
-		while(c.charAt(0) == ' '){
-			c = c.substring(1);
-		}
-		if (c.indexOf(name) == 0){
-			return c.substring(name.length, c.length);
-		}
-	}
-	return "";
-}
-
-function checkCookie(){
-	
-	alert("Cookie Checked" + uName);
-	if (username != ""){
-		alert("Welcome again " + username);
+//Function checks to see that there is text entered into the textbox. If there is it stores the cookie.
+//If there is no text it 
+function setCookie(){
+	if(document.getElementById("usrname").value === ""){
+		alert("Please enter username.");
+		document.getElementById("usrname").focus();
 		return false;
-	} else {
-		username = prompt ("Please enter your name: ", "");
-		if (username != "" && username != null){
-			setCookie("username", username, 365);
-			return false;
-		}
+	 }
+	 else{
+		document.cookie = "Username=" + document.getElementById("usrname").value;
+		//showCookie();
+		return false;
+	 }
 	}
+
+//Function to display cookie **TESTING TO SEE THAT COOKIE IS ACTUALLY STORED**
+function showCookie(){
+	alert("Cookie: " + document.cookie);
+}
+
+//Function to display cookie in another Window as 'Welcome username' with username replace with the cookie.
+function readCookie(){
+	var str = document.cookie;
+	var user= str.substring(9);
+	var myWindow = window.open("", "Welcome Window", "width=800,height=800");
+	myWindow.document.write("<p><strong>Welcome, " + user +"!</strong></p>");
 }
 
 </script>
@@ -49,13 +42,13 @@ function checkCookie(){
 <p><em>Taylor Jenkins</em></p>
 <h3>CIW JavaScript Specialist</h3>
 <hr />
-<form onsubmit="checkCookie()">
+<form name="myForm" onsubmit="setCookie()">
 <p>
 Username: <input type="text" id="usrname" name="usrname" />
 </p>
 <p>
-<input type="submit" value="Submit"/>
-<input type="reset" />
+<input type="submit" value="Submit Cookie"/>
+<input type= "button" value= "View Welcome Page" onclick="readCookie()"/>
 </p>
 </form>
 
